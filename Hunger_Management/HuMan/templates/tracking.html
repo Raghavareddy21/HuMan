@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geocoding Service</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>HuMan</title>
+    <!-- Bootstrap CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+    <link rel="stylesheet" href="/static/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="/static/vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="/static/vendors/flaticon/flaticon.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 80%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 90%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 250px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header_area">
+      <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="/"><img src="/static/img/lo2.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+               <a style="color:white" class="navbar-brand" href="/">HuMan App</br>Hunger Management</a>
+              <ul class="nav navbar-nav menu_nav justify-content-center">
+                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/maps">Donate</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a href="/Signup" class="primary_btn">join us</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </br></br></br></br></br></br></br>
+    <div id="floating-panel">
+      <input id="address" type="textbox" value="nellore">
+      <input id="submit" type="button" value="Geocode">
+    </div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaK8qoLfQ8WW7M4XGe60O1_LpVrBE6yyk&callback=initMap">
+    </script>
+
+  </body>
+  <footer class="footer_area section_gap_top">
+      <div class="container">
+        <div class="row footer_inner">
+          <div class="col-lg-3 col-sm-6">
+            <aside class="f_widget ab_widget">
+              <div class="f_title">
+                <h4>About Us</h4>
+              </div>
+            <p>
+  The amount of food getting wasted in our homes, in parties is more than enough for feeding many. HuMan connects donors with both individuals in need of food and organisations which are ready to feed others.So why can’t we take a step now?"Just with a snap and a tap"</p>
+            </aside>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <aside class="f_widget ab_widget">
+              <div class="f_title">
+                <h4>How It Works</h4>
+              </div>
+              <ul>
+
+                <li><a></a>Donate</a></li>
+                <li><a></a>Tap</a></li>
+                <li><a></a>Collect</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <aside class="f_widget ab_widget">
+              <div class="f_title">
+                <h4>Connect With Us </h4>
+              </div>
+              <ul>
+                <li><a href="#myTab"></a>Donator</a></li><a href="#myTab">
+                  <li><a href="#"></a>Individual
+                </a></li>
+                <li><a href="#"></a>Organization</a></li>
+
+
+              </ul>
+            </aside>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <aside class="f_widget ab_widget">
+              <div class="f_title">
+                <h4>Contact Us</h4>
+              </div>
+              <ul>
+                <li><a></a>XYZ PLACE</a></li>
+                  <li><a></a>LOCATION
+                </a></li>
+                <li><a ></a>Phno:81*******</a></li>
+                <li><a></a>E-mail</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+        <div class="row single-footer-widget">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="copy_right_text">
+              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with</i> by <a href=#>HuMan</a>
+  <!-- Template is licensed under CC BY 3.0. --></p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="social_widget">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  <!--================End Footer Area =================-->
+
+      <!--gmaps Js-->
+      <script src="/static/js/gmaps.min.js"></script>
+      <script src="/static/js/theme.js"></script>
+
+    </body>
+</html>
